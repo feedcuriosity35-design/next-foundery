@@ -1,6 +1,6 @@
 /**
  * Next Foundery — Checkout Page Controller
- * Strictly UPI Gateway & Verification
+ * Cashfree Gateway & Interactive Next Foundery Payment Modal
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,36 +10,70 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnSpinner = document.getElementById('buttonSpinner');
   const feedback = document.getElementById('checkoutFeedback');
 
-  const upiModal = document.getElementById('upiModal');
-  const qrImage = document.getElementById('qrCodeImage');
-  const upiVpaDisplay = document.getElementById('upiVpaDisplay');
-  const upiIntentLink = document.getElementById('upiIntentLink');
+  // Interactive Payment Gateway Modal Elements
+  const gatewayModal = document.getElementById('paymentGatewayModal');
+  const closeGatewayBtn = document.getElementById('closeGatewayBtn');
+  const gatewayAttendeeSummary = document.getElementById('gatewayAttendeeSummary');
+  const gpayAppBtn = document.getElementById('gpayAppBtn');
+  const phonepeAppBtn = document.getElementById('phonepeAppBtn');
+  const paytmAppBtn = document.getElementById('paytmAppBtn');
+  const upiIntentBtn = document.getElementById('upiIntentBtn');
+  const gatewayQrImage = document.getElementById('gatewayQrImage');
+  const gatewayUpiVpa = document.getElementById('gatewayUpiVpa');
+  const copyVpaBtn = document.getElementById('copyVpaBtn');
 
-  const utrForm = document.getElementById('utrForm');
-  const utrInput = document.getElementById('utrInput');
-  const utrError = document.getElementById('utrError');
+  // UTR Form inside Modal
+  const gatewayUtrForm = document.getElementById('gatewayUtrForm');
+  const gatewayUtrInput = document.getElementById('gatewayUtrInput');
+  const gatewayUtrError = document.getElementById('gatewayUtrError');
+  const gatewaySubmitUtrBtn = document.getElementById('gatewaySubmitUtrBtn');
 
+  // Test Simulator Button
   const simSuccessBtn = document.getElementById('simPaySuccessBtn');
-  const simFailBtn = document.getElementById('simPayFailBtn');
-  const copyUpiBtn = document.getElementById('copyUpiBtn');
 
-  if (copyUpiBtn && upiVpaDisplay) {
-    copyUpiBtn.addEventListener('click', () => {
-      const vpa = upiVpaDisplay.textContent.trim();
+  let currentOrderId = null;
+  let statusPollInterval = null;
+
+  // Modal Close Action
+  if (closeGatewayBtn) {
+    closeGatewayBtn.addEventListener('click', () => {
+      closeGatewayModal();
+    });
+  }
+
+  // Dismiss on clicking backdrop
+  if (gatewayModal) {
+    gatewayModal.addEventListener('click', (e) => {
+      if (e.target === gatewayModal) {
+        closeGatewayModal();
+      }
+    });
+  }
+
+  function closeGatewayModal() {
+    if (gatewayModal) gatewayModal.style.display = 'none';
+    if (statusPollInterval) {
+      clearInterval(statusPollInterval);
+      statusPollInterval = null;
+    }
+  }
+
+  // Copy UPI ID Action
+  if (copyVpaBtn && gatewayUpiVpa) {
+    copyVpaBtn.addEventListener('click', () => {
+      const vpa = gatewayUpiVpa.textContent.trim();
       if (navigator.clipboard) {
         navigator.clipboard.writeText(vpa).then(() => {
-          copyUpiBtn.textContent = 'Copied!';
-          copyUpiBtn.style.backgroundColor = '#25B84A';
+          copyVpaBtn.textContent = 'Copied!';
+          copyVpaBtn.style.backgroundColor = '#25B84A';
           setTimeout(() => {
-            copyUpiBtn.textContent = 'Copy';
-            copyUpiBtn.style.backgroundColor = 'var(--color-forest)';
+            copyVpaBtn.textContent = 'Copy';
+            copyVpaBtn.style.backgroundColor = 'var(--color-forest)';
           }, 2000);
         });
       }
     });
   }
-
-  let currentOrderId = null;
 
   // Restore cached form data if available
   try {
@@ -58,11 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } catch (e) {}
 
-  // 1. Submit Registration & Initialize UPI
+  // 1. Submit Registration Form & Launch Gateway
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Reset error states
     hideErrors();
     hideFeedback();
 
@@ -98,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
       sessionStorage.setItem('nf_checkout_data', JSON.stringify({ name, email, phone: cleanPhone, interest }));
     } catch (e) {}
 
-    // Set Loading State
     setLoading(true);
 
     try {
@@ -110,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // Call Backend to create order (amount is fixed server-side at 199)
+      // Call Backend to create order (amount is strictly ₹199)
       const res = await fetch('/api/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -131,17 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       currentOrderId = data.orderId;
 
-      // Update UPI QR fallback view
-      if (qrImage && data.qrCodeUrl) {
-        qrImage.src = data.qrCodeUrl;
-      }
-      if (upiVpaDisplay && data.upiVpa) {
-        upiVpaDisplay.textContent = data.upiVpa;
-      }
-      if (upiIntentLink && data.upiUri) {
-        upiIntentLink.href = data.upiUri;
-      }
-
       // 1. Check if official Cashfree client is active with session ID
       if (data.cashfreePaymentSessionId && typeof window.Cashfree === 'function') {
         launchCashfreePG(data);
@@ -149,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Check Razorpay fallback
         launchRazorpayUPI(data);
       } else {
-        // 3. Direct UPI QR Workflow
-        showUPIFallbackModal(data);
+        // 3. Open Next Foundery Interactive Payment Gateway Modal
+        openGatewayModal(data);
       }
     } catch (err) {
       console.error('Order creation error:', err);
@@ -160,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Launch Cashfree Payment Gateway
+  // Launch Cashfree Payment Gateway Flow
   function launchCashfreePG(orderData) {
     try {
       showFeedback('Opening Cashfree Payment Gateway...', 'info');
@@ -174,117 +195,77 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     } catch (cfErr) {
       console.error('[Cashfree Launch Error]:', cfErr);
-      showFeedback('Cashfree gateway error. Falling back to UPI QR...', 'warning');
-      showUPIFallbackModal(orderData);
+      showFeedback('Cashfree error. Opening secure UPI Gateway...', 'warning');
+      openGatewayModal(orderData);
     }
   }
 
-  // 2. Launch Razorpay UPI Payment Flow
-  function launchRazorpayUPI(orderData) {
-    const options = {
-      key: orderData.keyId,
-      amount: orderData.amount * 100, // paise
-      currency: 'INR',
-      name: 'Next Foundery',
-      description: 'Business Growth Blueprint Masterclass (₹199)',
-      image: '/nextfoundery-logo.png',
-      order_id: orderData.razorpayOrderId,
-      prefill: {
-        name: orderData.attendee.name,
-        email: orderData.attendee.email,
-        contact: orderData.attendee.phone,
-      },
-      // Strictly restrict payment method to UPI only
-      config: {
-        display: {
-          blocks: {
-            upi: {
-              name: 'Pay with UPI',
-              instruments: [
-                { method: 'upi' }
-              ],
-            },
-          },
-          sequence: ['block.upi'],
-          preferences: {
-            show_default_blocks: false,
-          },
-        },
-      },
-      theme: {
-        color: '#07140B',
-      },
-      handler: async function (response) {
-        // Backend Verification: Send signature tokens to server
-        setLoading(true);
-        showFeedback('Verifying UPI payment with bank...', 'info');
+  // Open Interactive Next Foundery Payment Gateway Modal
+  function openGatewayModal(orderData) {
+    if (!gatewayModal) return;
 
-        try {
-          const verifyRes = await fetch('/api/verify-payment', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              orderId: currentOrderId,
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-            }),
-          });
+    if (gatewayAttendeeSummary) {
+      gatewayAttendeeSummary.textContent = `${orderData.attendee.name} · +91 ${orderData.attendee.phone}`;
+    }
 
-          const verifyData = await verifyRes.json();
+    if (gatewayQrImage) {
+      gatewayQrImage.src = orderData.qrCodeUrl || orderData.generatedQrUrl || '/images/official-upi-qr.png';
+    }
 
-          if (verifyRes.ok && verifyData.success) {
-            if (typeof window.trackEvent === 'function') {
-              window.trackEvent('payment_verified', {
-                order_id: currentOrderId,
-                amount: 199,
-              });
-            }
-            window.location.href = verifyData.redirectUrl;
-          } else {
-            throw new Error(verifyData.error || 'Payment signature verification failed.');
-          }
-        } catch (verifyErr) {
-          console.error('Verification error:', verifyErr);
-          showFeedback('Payment verification was not completed. Please contact support if your account was debited.', 'error');
-          setLoading(false);
+    if (gatewayUpiVpa) {
+      gatewayUpiVpa.textContent = orderData.upiVpa || '9205828721@ptsbi';
+    }
+
+    if (gpayAppBtn) {
+      gpayAppBtn.href = orderData.gpayUri || orderData.upiUri;
+    }
+
+    if (phonepeAppBtn) {
+      phonepeAppBtn.href = orderData.phonepeUri || orderData.upiUri;
+    }
+
+    if (paytmAppBtn) {
+      paytmAppBtn.href = orderData.paytmUri || orderData.upiUri;
+    }
+
+    if (upiIntentBtn) {
+      upiIntentBtn.href = orderData.upiUri;
+    }
+
+    // Display Modal
+    gatewayModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Start auto-checking payment status
+    startOrderStatusPolling(orderData.orderId);
+  }
+
+  // Poll order status to automatically detect verified payment
+  function startOrderStatusPolling(orderId) {
+    if (statusPollInterval) clearInterval(statusPollInterval);
+
+    statusPollInterval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/order-status/${encodeURIComponent(orderId)}`);
+        const data = await res.json();
+        if (data && data.isPaid && data.successUrl) {
+          clearInterval(statusPollInterval);
+          statusPollInterval = null;
+          window.location.href = data.successUrl;
         }
-      },
-      modal: {
-        ondismiss: function () {
-          setLoading(false);
-          showFeedback('Payment was cancelled or closed. You can retry with the button below or scan the UPI QR code.', 'warning');
-          showUPIFallbackModal(orderData);
-        },
-      },
-    };
-
-    const rzp = new window.Razorpay(options);
-    rzp.on('payment.failed', function (response) {
-      console.warn('Payment failed:', response.error);
-      window.location.href = `/payment-failed?order_id=${encodeURIComponent(currentOrderId)}`;
-    });
-    rzp.open();
+      } catch (e) {}
+    }, 3000);
   }
 
-  // 3. Show Direct UPI QR Fallback View
-  function showUPIFallbackModal(orderData) {
-    if (upiModal) {
-      upiModal.style.display = 'block';
-      upiModal.scrollIntoView({ behavior: 'smooth' });
-    }
-    showFeedback('Order registered! Complete your ₹199 payment using the UPI QR code or any UPI app below.', 'success');
-  }
-
-  // 4. Submit UTR Reference
-  if (utrForm) {
-    utrForm.addEventListener('submit', async (e) => {
+  // Submit UTR Reference inside Modal
+  if (gatewayUtrForm) {
+    gatewayUtrForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (utrError) utrError.classList.remove('show');
+      if (gatewayUtrError) gatewayUtrError.classList.remove('show');
 
-      const utr = utrInput.value.trim();
+      const utr = gatewayUtrInput.value.trim();
       if (!utr || utr.length < 6) {
-        if (utrError) utrError.classList.add('show');
+        if (gatewayUtrError) gatewayUtrError.classList.add('show');
         return;
       }
 
@@ -293,9 +274,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const submitBtn = document.getElementById('submitUtrBtn');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting...';
+      if (gatewaySubmitUtrBtn) {
+        gatewaySubmitUtrBtn.disabled = true;
+        gatewaySubmitUtrBtn.textContent = 'Verifying...';
+      }
 
       try {
         const res = await fetch('/api/submit-utr', {
@@ -314,22 +296,24 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error(data.error || 'Failed to submit reference.');
         }
       } catch (err) {
-        showFeedback(err.message, 'error');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit for Verification';
+        if (gatewayUtrError) {
+          gatewayUtrError.textContent = err.message || 'Error submitting UTR.';
+          gatewayUtrError.classList.add('show');
+        }
+        if (gatewaySubmitUtrBtn) {
+          gatewaySubmitUtrBtn.disabled = false;
+          gatewaySubmitUtrBtn.textContent = 'Confirm Seat';
+        }
       }
     });
   }
 
-  // 5. Simulation Sandbox Buttons (For testing end-to-end payment flows)
+  // Instant Test Approve (For Sandbox Demonstration)
   if (simSuccessBtn) {
     simSuccessBtn.addEventListener('click', async () => {
-      if (!currentOrderId) {
-        showFeedback('Please click "Proceed to UPI Payment" first to create an order.', 'warning');
-        return;
-      }
+      if (!currentOrderId) return;
       simSuccessBtn.disabled = true;
-      simSuccessBtn.textContent = 'Verifying...';
+      simSuccessBtn.textContent = 'Approving...';
 
       try {
         const res = await fetch('/api/simulate-payment', {
@@ -347,26 +331,64 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (simFailBtn) {
-    simFailBtn.addEventListener('click', async () => {
-      if (!currentOrderId) {
-        showFeedback('Please click "Proceed to UPI Payment" first to create an order.', 'warning');
-        return;
-      }
-      try {
-        const res = await fetch('/api/simulate-payment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ orderId: currentOrderId, outcome: 'failed' }),
-        });
-        const data = await res.json();
-        if (data.success) {
-          window.location.href = data.redirectUrl;
+  // Launch Razorpay UPI Payment Flow (Fallback)
+  function launchRazorpayUPI(orderData) {
+    const options = {
+      key: orderData.keyId,
+      amount: orderData.amount * 100, // paise
+      currency: 'INR',
+      name: 'Next Foundery',
+      description: 'Business Growth Blueprint Masterclass (₹199)',
+      image: '/nextfoundery-logo.png',
+      order_id: orderData.razorpayOrderId,
+      prefill: {
+        name: orderData.attendee.name,
+        email: orderData.attendee.email,
+        contact: orderData.attendee.phone,
+      },
+      theme: { color: '#07140B' },
+      handler: async function (response) {
+        setLoading(true);
+        showFeedback('Verifying UPI payment with bank...', 'info');
+
+        try {
+          const verifyRes = await fetch('/api/verify-payment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              orderId: currentOrderId,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
+
+          const verifyData = await verifyRes.json();
+
+          if (verifyRes.ok && verifyData.success) {
+            window.location.href = verifyData.redirectUrl;
+          } else {
+            throw new Error(verifyData.error || 'Payment signature verification failed.');
+          }
+        } catch (verifyErr) {
+          console.error('Verification error:', verifyErr);
+          showFeedback('Payment verification was not completed. Please contact support.', 'error');
+          setLoading(false);
         }
-      } catch (e) {
-        console.error(e);
-      }
+      },
+      modal: {
+        ondismiss: function () {
+          setLoading(false);
+          openGatewayModal(orderData);
+        },
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.on('payment.failed', function () {
+      window.location.href = `/payment-failed?order_id=${encodeURIComponent(currentOrderId)}`;
     });
+    rzp.open();
   }
 
   // Helper UI functions

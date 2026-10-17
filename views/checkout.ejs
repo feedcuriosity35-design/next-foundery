@@ -147,96 +147,93 @@
           </div>
         </form>
 
-        <!-- UPI QR Code Modal / Fallback Workflow (Static official QR) -->
-        <div id="upiModal" style="display: none; margin-top: 2rem; border-top: 1px solid var(--color-border-subtle); padding-top: 2rem;">
-          <div style="text-align: center; margin-bottom: 1.5rem;">
-            <span class="eyebrow">STEP 2 OF 2 · SCAN &amp; PAY</span>
-            <h3 style="color: var(--color-white); margin-top: 0.35rem;">Scan &amp; Pay ₹199</h3>
-            <p class="body-text" style="font-size: 0.92rem;">
-              Open any UPI app, scan the QR below, and pay <strong>₹199</strong>. Then enter the UTR reference number to confirm your seat.
-            </p>
-          </div>
-
-          <!-- Official QR Card — styled like the ToolsFlow QR card -->
-          <div style="background: #FFFFFF; border: 2px solid #e0e4f0; border-radius: 20px; max-width: 320px; margin: 0 auto 1.5rem; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.18);">
-            <!-- Header -->
-            <div style="text-align: center; padding: 1.1rem 1rem 0.6rem;">
-              <div style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; color: #1a1f5e;">Next Foundery</div>
-              <div style="font-size: 0.78rem; color: #888; margin-top: 0.15rem;">Scan &amp; pay with any UPI app</div>
-            </div>
-            <!-- QR Code -->
-            <div style="padding: 0.75rem 1.25rem;">
-              <div style="background: #fff; border: 1.5px solid #dde3f0; border-radius: 12px; padding: 0.6rem; display: inline-block; width: 100%; box-sizing: border-box; text-align: center;">
-                <img src="/images/official-upi-qr.png" alt="Next Foundery UPI QR Code — ₹199" style="width: 100%; max-width: 240px; height: auto; display: block; margin: 0 auto;">
+        <!-- Next Foundery Interactive Payment Gateway Modal (Overlay Dialog) -->
+        <div id="paymentGatewayModal" class="payment-gateway-overlay" style="display: none;">
+          <div class="payment-gateway-dialog">
+            <!-- Modal Header -->
+            <div class="gateway-header">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="display: inline-block; width: 8px; height: 8px; background: var(--color-lime); border-radius: 50%; box-shadow: 0 0 10px var(--color-lime);"></span>
+                  <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-lime); text-transform: uppercase; letter-spacing: 0.05em;">SECURE PAYMENT GATEWAY</span>
+                </div>
+                <button type="button" id="closeGatewayBtn" class="gateway-close-btn" aria-label="Close">&times;</button>
+              </div>
+              <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                <div>
+                  <h3 style="color: var(--color-white); font-size: 1.35rem; margin: 0;">Complete Payment</h3>
+                  <div style="font-size: 0.85rem; color: var(--color-muted-light); margin-top: 0.15rem;" id="gatewayAttendeeSummary">Masterclass Registration</div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-size: 1.75rem; font-weight: 800; color: var(--color-lime); font-family: var(--font-heading);">₹199</div>
+                  <div style="font-size: 0.75rem; color: var(--color-muted-light);">All inclusive</div>
+                </div>
               </div>
             </div>
-            <!-- Amount & UPI ID -->
-            <div style="text-align: center; padding: 0.3rem 1rem 0.6rem;">
-              <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: 900; color: #e67e00;">₹199</div>
-              <div style="font-size: 0.88rem; color: #1a1f5e; font-weight: 600; font-family: monospace; margin-top: 0.1rem;" id="upiVpaDisplay"><%= config.payment.upiVpa %></div>
-            </div>
-            <!-- Accepted Apps -->
-            <div style="border-top: 1px solid #eef0f8; padding: 0.65rem 0.75rem;">
-              <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #bbb; text-align: center; margin-bottom: 0.5rem;">Accepted on</div>
-              <div style="display: flex; gap: 0.4rem; justify-content: center; flex-wrap: wrap;">
-                <span style="border: 1px solid #dde; border-radius: 20px; padding: 0.25rem 0.65rem; font-size: 0.74rem; color: #333; font-weight: 600;">Google Pay</span>
-                <span style="border: 1px solid #dde; border-radius: 20px; padding: 0.25rem 0.65rem; font-size: 0.74rem; color: #333; font-weight: 600;">PhonePe</span>
-                <span style="border: 1px solid #dde; border-radius: 20px; padding: 0.25rem 0.65rem; font-size: 0.74rem; color: #333; font-weight: 600;">Paytm</span>
-                <span style="border: 1px solid #dde; border-radius: 20px; padding: 0.25rem 0.65rem; font-size: 0.74rem; color: #333; font-weight: 600;">BHIM</span>
-                <span style="border: 1.5px solid #e67e00; border-radius: 20px; padding: 0.25rem 0.65rem; font-size: 0.74rem; color: #e67e00; font-weight: 700;">Any UPI app</span>
+
+            <!-- Instant UPI Apps Row -->
+            <div style="padding: 1.25rem 1.5rem; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--color-border-subtle);">
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--color-white); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">
+                Pay Directly via UPI App
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem;">
+                <a id="gpayAppBtn" href="#" class="gateway-app-btn">
+                  <span class="app-icon" style="background: #FFFFFF; color: #4285F4; font-weight: 800; font-size: 0.85rem; padding: 2px 6px; border-radius: 4px;">G</span>
+                  <span>Google Pay</span>
+                </a>
+                <a id="phonepeAppBtn" href="#" class="gateway-app-btn">
+                  <span class="app-icon" style="background: #5f259f; color: #fff; font-weight: 800; font-size: 0.85rem; padding: 2px 6px; border-radius: 4px;">Pe</span>
+                  <span>PhonePe</span>
+                </a>
+                <a id="paytmAppBtn" href="#" class="gateway-app-btn">
+                  <span class="app-icon" style="background: #00baf2; color: #fff; font-weight: 800; font-size: 0.85rem; padding: 2px 6px; border-radius: 4px;">P</span>
+                  <span>Paytm</span>
+                </a>
+              </div>
+              <div style="margin-top: 0.65rem;">
+                <a id="upiIntentBtn" href="#" class="btn btn-primary btn-block btn-sm" style="text-align: center;">
+                  Open Any UPI App (BHIM, CRED, Bank UPI) &rarr;
+                </a>
               </div>
             </div>
-          </div>
 
-          <!-- Copy UPI & Open App row -->
-          <div style="display: flex; gap: 0.75rem; max-width: 320px; margin: 0 auto 1.5rem; flex-wrap: wrap;">
-            <button type="button" id="copyUpiBtn" class="btn btn-secondary btn-sm" style="flex: 1; white-space: nowrap;">Copy UPI ID</button>
-            <a id="upiIntentLink" href="upi://pay?pa=<%= encodeURIComponent(config.payment.upiVpa) %>&pn=<%= encodeURIComponent(config.payment.upiPayeeName) %>&am=199&cu=INR&tn=NextFoundery-Masterclass" class="btn btn-primary btn-sm" style="flex: 1; text-align: center; white-space: nowrap;">
-              Open UPI App
-            </a>
-          </div>
+            <!-- QR Code Section -->
+            <div style="padding: 1.5rem; text-align: center;">
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-muted-light); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">
+                OR SCAN &amp; PAY WITH ANY QR SCANNER
+              </div>
 
-          <!-- UTR Submission for verification -->
-          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 1.5rem;">
-            <h4 style="font-size: 1.05rem; color: var(--color-white); margin-bottom: 0.5rem;">
-              Completed Payment? Enter Reference / UTR
-            </h4>
-            <p class="body-text" style="font-size: 0.88rem; margin-bottom: 1rem;">
-              Once completed in your UPI app, enter the 12-digit UPI Reference / UTR number shown in your transaction receipt so we can verify your seat.
-            </p>
+              <div style="background: #FFFFFF; border-radius: 16px; padding: 0.85rem; display: inline-block; box-shadow: 0 4px 20px rgba(0,0,0,0.3); margin-bottom: 0.75rem;">
+                <img id="gatewayQrImage" src="/images/official-upi-qr.png" alt="Scan to pay ₹199" style="width: 200px; height: 200px; display: block; object-fit: contain;">
+              </div>
 
-            <form id="utrForm" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-              <input 
-                type="text" 
-                id="utrInput" 
-                class="form-input" 
-                style="flex: 1; min-width: 200px;" 
-                placeholder="e.g. 429381729012" 
-                maxlength="20"
-                required
-              >
-              <button type="submit" class="btn btn-secondary" id="submitUtrBtn" style="white-space: nowrap;">
-                Submit for Verification
-              </button>
-            </form>
-            <div class="form-error" id="utrError">Please enter a valid 12-digit UPI Reference (UTR).</div>
-          </div>
+              <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+                <span style="font-size: 0.88rem; color: var(--color-offwhite); font-family: monospace;" id="gatewayUpiVpa"><%= config.payment.upiVpa %></span>
+                <button type="button" id="copyVpaBtn" class="btn btn-sm btn-secondary" style="padding: 0.25rem 0.65rem; font-size: 0.78rem;">Copy</button>
+              </div>
 
-          <!-- Development Sandbox Simulation Controls -->
-          <div id="sandboxSimControls" style="margin-top: 1.5rem; background: rgba(183, 245, 42, 0.05); border: 1px dashed rgba(183, 245, 42, 0.3); border-radius: var(--radius-md); padding: 1.25rem; text-align: center;">
-            <div style="font-size: 0.82rem; font-weight: 700; color: var(--color-lime); text-transform: uppercase; margin-bottom: 0.5rem;">
-              Sandbox / Verification Testing Mode
-            </div>
-            <p style="font-size: 0.85rem; color: var(--color-muted-light); margin-bottom: 0.75rem;">
-              Test the end-to-end payment lifecycle:
-            </p>
-            <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
-              <button type="button" class="btn btn-sm btn-primary" id="simPaySuccessBtn">
-                Simulate Successful UPI Verification
-              </button>
-              <button type="button" class="btn btn-sm btn-secondary" id="simPayFailBtn">
-                Simulate Payment Failure
-              </button>
+              <!-- UTR submission form -->
+              <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); padding: 1rem; text-align: left;">
+                <div style="font-size: 0.85rem; font-weight: 600; color: var(--color-white); margin-bottom: 0.35rem;">
+                  Completed Payment? Submit 12-digit UTR
+                </div>
+                <div style="font-size: 0.78rem; color: var(--color-muted-light); margin-bottom: 0.75rem;">
+                  Enter the 12-digit UPI reference / UTR number from your payment app to instantly confirm your seat.
+                </div>
+                <form id="gatewayUtrForm" style="display: flex; gap: 0.5rem;">
+                  <input type="text" id="gatewayUtrInput" class="form-input" style="flex: 1;" placeholder="e.g. 429381729012" maxlength="20" required>
+                  <button type="submit" class="btn btn-primary btn-sm" id="gatewaySubmitUtrBtn">Confirm Seat</button>
+                </form>
+                <div class="form-error" id="gatewayUtrError" style="margin-top: 0.4rem;">Please enter a valid 12-digit UTR.</div>
+              </div>
+
+              <!-- Sandbox Testing Simulator -->
+              <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(183, 245, 42, 0.05); border: 1px dashed rgba(183, 245, 42, 0.3); border-radius: var(--radius-sm); font-size: 0.8rem; display: flex; align-items: center; justify-content: space-between;">
+                <span style="color: var(--color-muted-light);">Test Verification Mode</span>
+                <button type="button" class="btn btn-sm btn-secondary" id="simPaySuccessBtn" style="padding: 0.25rem 0.65rem; font-size: 0.75rem;">
+                  Instant Test Approve
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -307,6 +304,78 @@
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/* Payment Gateway Overlay Dialog */
+.payment-gateway-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 12, 7, 0.88);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.payment-gateway-dialog {
+  background: var(--color-forest);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  animation: modalSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.gateway-header {
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.gateway-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-muted-light);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.gateway-close-btn:hover {
+  color: var(--color-white);
+}
+
+.gateway-app-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.75rem 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.gateway-app-btn:hover {
+  background: rgba(183, 245, 42, 0.08);
+  border-color: var(--color-lime);
 }
 </style>
 

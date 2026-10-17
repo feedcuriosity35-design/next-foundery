@@ -134,13 +134,22 @@ router.post('/create-order', async (req, res) => {
       }
     }
 
-    // Generate Standard UPI Deep Link (UPI standard v1.5)
-    // upi://pay?pa=...&pn=...&am=199&cu=INR&tn=...
-    const upiUri = `upi://pay?pa=${encodeURIComponent(config.payment.upiVpa)}` +
-      `&pn=${encodeURIComponent(config.payment.upiPayeeName)}` +
-      `&am=${enforcedAmount}` +
+    // Generate Standard UPI Deep Links (NPCI standard compliant)
+    // Clean payee and note to avoid bank app intent rejection
+    const cleanPayee = (config.payment.upiPayeeName || 'Aarushi Bajpai').replace(/[^a-zA-Z0-9 ]/g, '').trim();
+    const cleanTn = 'NextFounderyMasterclass';
+    const formattedAmount = `${enforcedAmount}.00`;
+
+    const upiQuery = `pa=${encodeURIComponent(config.payment.upiVpa)}` +
+      `&pn=${encodeURIComponent(cleanPayee)}` +
+      `&am=${formattedAmount}` +
       `&cu=${enforcedCurrency}` +
-      `&tn=${encodeURIComponent(`NextFoundery-${order.order_id}`)}`;
+      `&tn=${encodeURIComponent(cleanTn)}`;
+
+    const upiUri = `upi://pay?${upiQuery}`;
+    const gpayUri = `tez://upi/pay?${upiQuery}`;
+    const phonepeUri = `phonepe://pay?${upiQuery}`;
+    const paytmUri = `paytmmp://pay?${upiQuery}`;
 
     // Generate dynamic QR Code Data URL
     const qrCodeUrl = await QRCode.toDataURL(upiUri, {
@@ -165,11 +174,14 @@ router.post('/create-order', async (req, res) => {
       currency: enforcedCurrency,
       amountFormatted: `₹${enforcedAmount}`,
       upiUri,
+      gpayUri,
+      phonepeUri,
+      paytmUri,
       qrCodeUrl: config.payment.officialQrImage || qrCodeUrl,
       generatedQrUrl: qrCodeUrl,
       officialQrImage: config.payment.officialQrImage,
       upiVpa: config.payment.upiVpa,
-      upiPayeeName: config.payment.upiPayeeName,
+      upiPayeeName: cleanPayee,
       keyId: config.payment.isRazorpayConfigured ? config.payment.razorpayKeyId : null,
       isRazorpayConfigured: config.payment.isRazorpayConfigured,
       attendee: {
