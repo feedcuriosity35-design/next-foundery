@@ -1,0 +1,137 @@
+<%- include('partials/head', { title, metaDescription }) %>
+
+<header class="navbar" style="border-bottom: 1px solid var(--color-border-subtle);">
+  <div class="container navbar-inner" style="justify-content: space-between;">
+    <a href="/" class="brand-link">
+      <img src="/nextfoundery-logo.png" alt="Next Foundery Logo" class="brand-logo-img">
+      <div class="brand-text-container">
+        <span class="brand-name">Next Foundery</span>
+        <span class="brand-tagline">Businesses Built Better</span>
+      </div>
+    </a>
+    <span style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(37, 184, 74, 0.15); border: 1px solid var(--color-green-support); color: var(--color-lime); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      Payment Verified
+    </span>
+  </div>
+</header>
+
+<main class="section" style="padding-top: 3.5rem; padding-bottom: 5rem;">
+  <div class="container container-narrow">
+    <div class="status-card" id="receiptArea">
+      <!-- Success Icon -->
+      <div class="status-icon-large status-icon-success">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+
+      <!-- Eyebrow & Headline -->
+      <span class="eyebrow" style="color: var(--color-lime);">CONFIRMED PARTICIPANT</span>
+      <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); margin-top: 0.5rem; margin-bottom: 0.75rem;">
+        Your Seat Is Confirmed!
+      </h1>
+      <p class="body-text" style="font-size: 1.05rem; max-width: 540px; margin: 0 auto 2rem;">
+        Welcome to the masterclass, <strong><%= order.name %></strong>. Your ₹199 payment has been verified successfully.
+      </p>
+
+      <!-- Prominent WhatsApp Community Button (Protected & Only for verified orders!) -->
+      <div style="background: rgba(37, 211, 102, 0.08); border: 1px solid rgba(37, 211, 102, 0.35); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2.5rem; text-align: center;">
+        <span class="eyebrow" style="color: #25D366; font-size: 0.78rem;">IMMEDIATE ACTION REQUIRED</span>
+        <h3 style="font-size: 1.35rem; color: var(--color-white); margin-bottom: 0.5rem;">
+          Join the Private WhatsApp Group
+        </h3>
+        <p class="body-text" style="font-size: 0.95rem; margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+          The private WhatsApp group is where session links, reminders, resource files, and post-session recording access instructions will be distributed.
+        </p>
+
+        <a href="<%= whatsappInviteUrl %>" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" id="whatsappJoinBtn" style="display: inline-flex;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.181-.077.355.101.173.45 1.745 1.97 2.422.196.087.35.138.47.177.202.065.386.056.531.034.162-.024.498-.204.568-.401z"/>
+          </svg>
+          Join the WhatsApp Group
+        </a>
+      </div>
+
+      <!-- Verified Registration Details Table -->
+      <table class="order-details-table">
+        <tbody>
+          <tr>
+            <td class="order-details-label">Order Reference</td>
+            <td class="order-details-value" style="font-family: monospace; letter-spacing: 0.05em;"><%= order.order_id %></td>
+          </tr>
+          <tr>
+            <td class="order-details-label">Masterclass</td>
+            <td class="order-details-value"><%= config.brand.masterclassTitle %></td>
+          </tr>
+          <tr>
+            <td class="order-details-label">Attendee Name</td>
+            <td class="order-details-value"><%= order.name %></td>
+          </tr>
+          <tr>
+            <td class="order-details-label">Registered Email</td>
+            <td class="order-details-value"><%= order.email %></td>
+          </tr>
+          <tr>
+            <td class="order-details-label">Registered Mobile</td>
+            <td class="order-details-value">+91 <%= order.phone %></td>
+          </tr>
+          <tr>
+            <td class="order-details-label">Amount Paid</td>
+            <td class="order-details-value" style="color: var(--color-lime); font-size: 1.15rem;">₹199 INR</td>
+          </tr>
+          <tr>
+            <td class="order-details-label">Payment Status</td>
+            <td class="order-details-value" style="color: var(--color-green-support);">Verified &amp; Confirmed</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Session Logistics & Instructions Box -->
+      <div style="background: var(--color-forest); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); padding: 1.75rem; text-align: left; margin-bottom: 2rem;">
+        <h4 style="font-size: 1.1rem; color: var(--color-white); margin-bottom: 0.75rem;">
+          Session Joining Logistics
+        </h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem; color: var(--color-muted-light);">
+          <li style="display: flex; gap: 0.75rem;">
+            <strong style="color: var(--color-white); min-width: 90px;">Date:</strong>
+            <span><%= config.logistics.sessionDate %></span>
+          </li>
+          <li style="display: flex; gap: 0.75rem;">
+            <strong style="color: var(--color-white); min-width: 90px;">Time:</strong>
+            <span><%= config.logistics.sessionTime %></span>
+          </li>
+          <li style="display: flex; gap: 0.75rem;">
+            <strong style="color: var(--color-white); min-width: 90px;">Format:</strong>
+            <span><%= config.logistics.sessionFormat %></span>
+          </li>
+          <li style="display: flex; gap: 0.75rem; border-top: 1px solid var(--color-border-subtle); padding-top: 0.75rem; margin-top: 0.25rem;">
+            <strong style="color: var(--color-white); min-width: 90px;">Join Link:</strong>
+            <span><%= config.logistics.joinInfo %></span>
+          </li>
+          <li style="display: flex; gap: 0.75rem;">
+            <strong style="color: var(--color-white); min-width: 90px;">Recordings:</strong>
+            <span><%= config.logistics.recordingInfo %></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print Receipt
+        </button>
+        <a href="/" class="btn btn-secondary btn-sm">
+          Return to Homepage
+        </a>
+      </div>
+
+      <!-- Support Help -->
+      <div style="margin-top: 2.5rem; font-size: 0.88rem; color: var(--color-muted-light);">
+        Questions regarding your registration? Email our support desk anytime at 
+        <a href="mailto:<%= config.support.email %>" style="color: var(--color-lime); text-decoration: underline;"><%= config.support.email %></a>.
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

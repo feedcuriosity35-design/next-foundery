@@ -1,0 +1,72 @@
+<%- include('partials/head', { title, metaDescription }) %>
+<%- include('partials/header') %>
+
+<main class="section" style="padding-top: 4rem; padding-bottom: 5rem;">
+  <div class="container container-narrow">
+    <div class="checkout-card" style="text-align: center; padding: 3rem 2rem;">
+      <span class="eyebrow" style="margin-bottom: 0.75rem; display: inline-block;">CONTACT &amp; ASSISTANCE</span>
+      <h1 style="font-size: 2.2rem; margin-bottom: 1rem; color: var(--color-white);">Get in Touch</h1>
+      <p class="body-text" style="font-size: 1.05rem; max-width: 520px; margin: 0 auto 2.5rem; color: var(--color-offwhite);">
+        For inquiries regarding the masterclass, registration, or support, reach out directly to our team via email.
+      </p>
+
+      <div style="background: rgba(183, 245, 42, 0.06); border: 1px solid rgba(183, 245, 42, 0.25); border-radius: var(--radius-md); padding: 2rem 1.5rem; max-width: 500px; margin: 0 auto 2.5rem;">
+        <div style="font-size: 0.85rem; text-transform: uppercase; color: var(--color-lime); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
+          Official Support Email
+        </div>
+        <a href="mailto:nextfoundery@gmail.com" style="display: inline-block; font-size: 1.35rem; color: var(--color-white); font-weight: 700; text-decoration: underline; margin-bottom: 0.5rem; word-break: break-all;">
+          nextfoundery@gmail.com
+        </a>
+        <p style="font-size: 0.88rem; color: var(--color-muted-light); margin: 0;">
+          Our support desk reviews and responds to emails within 24 business hours.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 500px; margin: 0 auto 2.5rem; text-align: left;">
+        <div style="background: var(--color-forest-surface); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); padding: 1.25rem;">
+          <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-lime); font-weight: 700; margin-bottom: 0.35rem;">
+            Operating Hours
+          </div>
+          <div style="color: var(--color-white); font-weight: 600; font-size: 0.95rem;">
+            <%= config.support.hours %>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--color-muted-light); margin-top: 0.25rem;">
+            Indian Standard Time (IST)
+          </div>
+        </div>
+
+        <div style="background: var(--color-forest-surface); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); padding: 1.25rem;">
+          <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-lime); font-weight: 700; margin-bottom: 0.35rem;">
+            Masterclass Launch
+          </div>
+          <div style="color: var(--color-white); font-weight: 600; font-size: 0.95rem;">
+            ₹199 Launch Offer
+          </div>
+          <div style="font-size: 0.8rem; color: var(--color-muted-light); margin-top: 0.25rem;">
+            Live session + recordings included
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="mailto:nextfoundery@gmail.com" class="btn btn-primary">
+          Email: nextfoundery@gmail.com
+        </a>
+        <a href="/checkout" class="btn btn-secondary">
+          Claim Seat · ₹199
+        </a>
+      </div>
+
+      <div style="margin-top: 2.5rem; border-top: 1px solid var(--color-border-subtle); padding-top: 1.5rem;">
+        <div style="font-size: 0.82rem; color: var(--color-muted-light); display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+          <a href="/#faq" style="color: var(--color-white); text-decoration: underline;">Masterclass FAQ</a>
+          <a href="/refund-policy" style="color: var(--color-white); text-decoration: underline;">Refund Policy</a>
+          <a href="/privacy" style="color: var(--color-white); text-decoration: underline;">Privacy Policy</a>
+          <a href="/terms" style="color: var(--color-white); text-decoration: underline;">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

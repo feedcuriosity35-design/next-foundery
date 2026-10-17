@@ -1,0 +1,710 @@
+<%- include('partials/head', { title, metaDescription }) %>
+<%- include('partials/header') %>
+
+<main>
+  <!-- ==============================================================================
+       SECTION 1: HERO
+       ============================================================================== -->
+  <section class="section section-hero" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <!-- Eyebrow -->
+          <div class="eyebrow">
+            <span class="focus-item-dot"></span>
+            BUSINESS GROWTH BLUEPRINT MASTERCLASS
+          </div>
+
+          <!-- Offer Badge -->
+          <div>
+            <div class="badge-offer">
+              <span class="badge-offer-dot"></span>
+              SPECIAL LAUNCH OFFER · ₹199
+            </div>
+          </div>
+
+          <!-- Headline -->
+          <h1 class="display-title">
+            Your Business Journey Starts Here — For Just ₹199.
+          </h1>
+
+          <!-- Supporting Copy -->
+          <p class="lead-text">
+            Have a business idea but don't know where to start? Join an interactive masterclass designed to help you explore your ideas, understand business fundamentals, discuss your doubts, and find a clearer direction for your next steps.
+          </p>
+
+          <!-- CTAs -->
+          <div class="hero-actions">
+            <a href="/checkout" class="btn btn-primary" id="heroPrimaryCta">
+              Claim Your Seat for ₹199
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#explore" class="btn btn-secondary" id="heroSecondaryCta">
+              Explore the Masterclass
+            </a>
+          </div>
+
+          <!-- Benefit Highlights -->
+          <div class="hero-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <span>Practical Business Guidance</span>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <span>Interactive Open Discussion</span>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <span>Session Recordings Included</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual -->
+        <div class="hero-visual">
+          <div class="hero-image-wrapper">
+            <img src="/images/hero-blueprint.jpg" alt="Business Growth Blueprint Visualization" class="hero-image" width="600" height="400" loading="eager">
+          </div>
+          <div class="hero-floating-card">
+            <div>
+              <div class="hero-floating-price">₹199</div>
+              <div class="hero-floating-meta">All-inclusive access &amp; recordings</div>
+            </div>
+            <a href="/checkout" class="btn btn-primary btn-sm" style="padding: 0.5rem 1rem;">Join Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       SECTION 2: THE PROBLEM
+       ============================================================================== -->
+  <section class="section section-dark" id="the-problem">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">THE REALITY OF STARTING UP</span>
+        <h2 class="section-title">An Idea Is a Start. Knowing What to Do Next Is the Real Challenge.</h2>
+        <p class="body-text" style="font-size: 1.1rem; max-width: 620px; margin: 0 auto;">
+          Turning an early concept into a viable venture requires more than enthusiasm. Aspiring founders face real hurdles before taking their first step.
+        </p>
+      </div>
+
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon-wrapper">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          </div>
+          <h3 class="problem-card-title">Multiple Ideas, Little Direction</h3>
+          <p class="problem-card-text">
+            Having multiple ideas but not knowing which to pursue or prioritize based on your strengths and resources.
+          </p>
+        </div>
+
+        <div class="problem-card">
+          <div class="problem-icon-wrapper">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3 class="problem-card-title">Customer Uncertainty</h3>
+          <p class="problem-card-text">
+            Being unsure about finding the right customers and understanding if they genuinely need what you want to build.
+          </p>
+        </div>
+
+        <div class="problem-card">
+          <div class="problem-icon-wrapper">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h3 class="problem-card-title">Risking Capital Blindly</h3>
+          <p class="problem-card-text">
+            Not knowing how to validate an idea before investing hard-earned savings, time, and emotional energy.
+          </p>
+        </div>
+
+        <div class="problem-card">
+          <div class="problem-icon-wrapper">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <h3 class="problem-card-title">Conflicting Advice Overload</h3>
+          <p class="problem-card-text">
+            Feeling overwhelmed by conflicting business advice on social media that lacks context for early-stage beginnings.
+          </p>
+        </div>
+
+        <div class="problem-card">
+          <div class="problem-icon-wrapper">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+          </div>
+          <h3 class="problem-card-title">Execution Paralysis</h3>
+          <p class="problem-card-text">
+            Struggling to turn a promising conceptual idea into a grounded, step-by-step practical action plan.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       SECTION 3: WHAT YOU'LL EXPLORE (6 BENEFIT CARDS)
+       ============================================================================== -->
+  <section class="section" id="explore">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">CURRICULUM &amp; DISCUSSION</span>
+        <h2 class="section-title">Turn Your Questions Into Clearer Next Steps.</h2>
+        <p class="body-text" style="font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
+          The masterclass provides structured guidance and learning opportunities to help you think through every dimension of your potential venture.
+        </p>
+      </div>
+
+      <div class="explore-grid">
+        <!-- Card 1 -->
+        <div class="explore-card">
+          <span class="explore-card-number">PILLAR 01</span>
+          <h3 class="explore-card-title">Business Idea Clarity</h3>
+          <p class="explore-card-desc">
+            Explore business ideas that align with your interests, skills, resources, and goals.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="explore-card">
+          <span class="explore-card-number">PILLAR 02</span>
+          <h3 class="explore-card-title">Customer and Problem Discovery</h3>
+          <p class="explore-card-desc">
+            Understand who your potential customers might be and what problems your business could solve.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="explore-card">
+          <span class="explore-card-number">PILLAR 03</span>
+          <h3 class="explore-card-title">Idea Validation</h3>
+          <p class="explore-card-desc">
+            Learn practical ways to test business assumptions and evaluate an idea before committing significant resources.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="explore-card">
+          <span class="explore-card-number">PILLAR 04</span>
+          <h3 class="explore-card-title">Business Fundamentals</h3>
+          <p class="explore-card-desc">
+            Understand the basic considerations involved in taking a business idea toward a real venture.
+          </p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="explore-card">
+          <span class="explore-card-number">PILLAR 05</span>
+          <h3 class="explore-card-title">Open Discussion</h3>
+          <p class="explore-card-desc">
+            Bring your questions, discuss your doubts, and participate in an interactive conversation about entrepreneurship.
+          </p>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="explore-card">
+          <span class="explore-card-number">PILLAR 06</span>
+          <h3 class="explore-card-title">Personalized Direction</h3>
+          <p class="explore-card-desc">
+            Explore possible next steps based on your ideas, current circumstances, challenges, and goals.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       SECTION 4: WHAT'S INCLUDED (4 INCLUSIONS)
+       ============================================================================== -->
+  <section class="section section-dark" id="inclusions">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">WHAT YOU GET FOR ₹199</span>
+        <h2 class="section-title">More Than Just Watching a Session.</h2>
+        <p class="body-text" style="font-size: 1.1rem; max-width: 620px; margin: 0 auto;">
+          An engaging, practical environment built to give you real clarity and accessible material you can review whenever you need.
+        </p>
+      </div>
+
+      <div class="included-grid">
+        <div class="included-card">
+          <div class="included-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+          </div>
+          <div>
+            <h3 class="included-title">Interactive Masterclass</h3>
+            <p class="included-text">
+              A structured session focused on practical entrepreneurship guidance.
+            </p>
+          </div>
+        </div>
+
+        <div class="included-card">
+          <div class="included-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div>
+            <h3 class="included-title">Open Discussion</h3>
+            <p class="included-text">
+              An opportunity to ask questions and discuss business challenges.
+            </p>
+          </div>
+        </div>
+
+        <div class="included-card">
+          <div class="included-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+          </div>
+          <div>
+            <h3 class="included-title">Idea-Focused Guidance</h3>
+            <p class="included-text">
+              Explore possible directions relevant to your situation and goals.
+            </p>
+          </div>
+        </div>
+
+        <div class="included-card">
+          <div class="included-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+          </div>
+          <div>
+            <h3 class="included-title">Session Recordings</h3>
+            <p class="included-text">
+              Receive access to session recordings so you can revisit the discussions and learning material afterward.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="included-note">
+        <strong>Recording Access Notice:</strong> Recording-access instructions will be provided directly to registered participants via email and WhatsApp after the session.
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       SECTION 5: HOW IT WORKS (4 STEPS)
+       ============================================================================== -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">STEP-BY-STEP PROCESS</span>
+        <h2 class="section-title">How It Works</h2>
+        <p class="body-text" style="font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+          From registration to post-session learning, our process is clear, transparent, and frictionless.
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-badge">Step 1</span>
+          <h3 class="step-title">Reserve Your Seat</h3>
+          <p class="step-desc">
+            Register for the masterclass and complete the ₹199 UPI payment.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Step 2</span>
+          <h3 class="step-title">Get Your Confirmation</h3>
+          <p class="step-desc">
+            Once your payment is verified, receive confirmation and instructions for joining the session.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Step 3</span>
+          <h3 class="step-title">Attend and Participate</h3>
+          <p class="step-desc">
+            Explore business questions, discuss ideas, and learn practical approaches.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Step 4</span>
+          <h3 class="step-title">Revisit the Recordings</h3>
+          <p class="step-desc">
+            Access the session recordings according to the instructions provided after the masterclass.
+          </p>
+        </div>
+      </div>
+
+      <!-- Configurable Session Logistics Box -->
+      <div class="logistics-bar">
+        <div>
+          <div class="logistics-item-label">Scheduled Date</div>
+          <div class="logistics-item-value"><%= config.logistics.sessionDate %></div>
+        </div>
+        <div>
+          <div class="logistics-item-label">Time &amp; Duration</div>
+          <div class="logistics-item-value"><%= config.logistics.sessionTime %></div>
+        </div>
+        <div>
+          <div class="logistics-item-label">Format</div>
+          <div class="logistics-item-value"><%= config.logistics.sessionFormat %></div>
+        </div>
+        <div>
+          <div class="logistics-item-label">Special Price</div>
+          <div class="logistics-item-value" style="color: var(--color-lime);">₹199 INR</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       SECTION 6: WHO IS THIS FOR?
+       ============================================================================== -->
+  <section class="section section-dark" id="who-is-this-for">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">TARGET AUDIENCE</span>
+        <h2 class="section-title">Your Starting Point Doesn't Matter. Your Next Step Does.</h2>
+        <p class="body-text" style="font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
+          Whether you have a scribbled idea on a notebook or you are evaluating a full transition into entrepreneurship, this masterclass is designed for:
+        </p>
+      </div>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="audience-check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="audience-text">
+            Aspiring entrepreneurs exploring their first business.
+          </div>
+        </div>
+
+        <div class="audience-card">
+          <div class="audience-check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="audience-text">
+            People with several business ideas who need help evaluating them.
+          </div>
+        </div>
+
+        <div class="audience-card">
+          <div class="audience-check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="audience-text">
+            Beginners who want to understand business validation.
+          </div>
+        </div>
+
+        <div class="audience-card">
+          <div class="audience-check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="audience-text">
+            Working professionals exploring entrepreneurship.
+          </div>
+        </div>
+
+        <div class="audience-card">
+          <div class="audience-check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="audience-text">
+            People who want to understand the basics before investing in a business.
+          </div>
+        </div>
+
+        <div class="audience-card">
+          <div class="audience-check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="audience-text">
+            Anyone looking for practical guidance on their next business steps.
+          </div>
+        </div>
+      </div>
+
+      <div class="experience-note">
+        <strong>Important Note:</strong> Prior business experience is not required. All discussions are structured to be accessible, clear, and actionable.
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       SECTION 7: ABOUT NEXT FOUNDERY
+       ============================================================================== -->
+  <section class="section" id="about-foundery">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <span class="eyebrow">ABOUT NEXT FOUNDERY</span>
+          <h2 class="section-title">We Help You Think Beyond the Idea.</h2>
+          <p class="body-text" style="font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Next Foundery is a business-building brand focused on helping people approach entrepreneurship with better research, clearer strategy, stronger positioning, and practical execution.
+          </p>
+          <p class="body-text">
+            Rather than relying on luck or ungrounded hype, we ground your journey in real market dynamics and structured frameworks across our core focus areas:
+          </p>
+
+          <ul class="focus-list">
+            <li class="focus-item">
+              <span class="focus-item-dot"></span>
+              Business research and idea validation
+            </li>
+            <li class="focus-item">
+              <span class="focus-item-dot"></span>
+              Business strategy and positioning
+            </li>
+            <li class="focus-item">
+              <span class="focus-item-dot"></span>
+              Marketing and growth planning
+            </li>
+            <li class="focus-item">
+              <span class="focus-item-dot"></span>
+              Customer and market understanding
+            </li>
+            <li class="focus-item">
+              <span class="focus-item-dot"></span>
+              Execution and business development
+            </li>
+          </ul>
+
+          <div style="margin-top: 2rem;">
+            <a href="/about" class="btn btn-secondary">
+              Learn More About Our Approach
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="about-image-wrapper">
+            <img src="/images/about-foundery.jpg" alt="Next Foundery Venture Architecture and Strategy" width="600" height="400" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       SECTION 8: FREQUENTLY ASKED QUESTIONS (ALL 13 ITEMS VERBATIM)
+       ============================================================================== -->
+  <section class="section section-dark" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">TRANSPARENT ANSWERS</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="body-text" style="font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+          Everything you need to know about the masterclass, payment, and post-session access.
+        </p>
+      </div>
+
+      <div class="faq-accordion" id="faqAccordion">
+        <!-- Q1 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>What is the Business Growth Blueprint Masterclass?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              It is a practical, interactive masterclass by Next Foundery for people who want to start a business but need help understanding where to begin, how to explore an idea, and what steps to consider next.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>Who should attend this masterclass?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              It is designed for aspiring entrepreneurs, first-time founders, people exploring business ideas, working professionals considering entrepreneurship, and anyone looking for practical direction before starting a business.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>Do I need to have a business idea already?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              No. You can join with an idea you want to explore or simply an interest in starting a business. The masterclass will help you think through relevant questions and possible next steps.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>What will I learn?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              You'll explore business ideas, customer problems, idea validation, business fundamentals, and practical next steps. You'll also have the opportunity to participate in discussions and raise questions relevant to your situation.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>Will I receive personalized guidance?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The masterclass includes open discussion and an opportunity to discuss your ideas, challenges, and goals. The guidance you receive will depend on the questions raised and the time available during the session.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>How much does the masterclass cost?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The masterclass is available at a special launch price of <strong>₹199</strong>. The total payable amount will be displayed before you complete your payment.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>Will I receive a recording of the session?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes. Session recordings will be provided so you can revisit the discussions and learning material. Instructions for accessing the recordings will be shared with registered participants. The applicable access duration and delivery details will be communicated when confirmed.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>What if I cannot attend the live session?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Session recordings will be provided to registered participants. You can use the recordings to revisit the session. Check the joining instructions and recording-access information shared with you for the applicable details.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>How will I receive the session details?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              After your payment is verified, you'll receive registration confirmation and instructions for accessing the session. Recording details will be shared when the recordings are available.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>How can I pay?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              You can pay securely using the UPI payment options provided at checkout. Available UPI apps and payment methods will depend on the integrated payment gateway.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>What happens if my payment is pending?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              If your payment is pending verification, the website will display a pending status. Your registration will be confirmed once the payment is verified. Avoid making a duplicate payment while your existing transaction is being checked.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q12 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>Is business success or income guaranteed?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              No. The masterclass provides practical guidance, discussion, and insights. Your results will depend on your decisions, circumstances, research, resources, and execution.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" aria-expanded="false">
+            <span>What is the refund policy?</span>
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Please review the <a href="/refund-policy" style="color: var(--color-lime); text-decoration: underline;">Refund Policy</a> page before purchasing. Refund eligibility will follow the policy displayed on the website at checkout. Do not promise automatic refunds or introduce refund guarantees that have not been established.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       SECTION 9: FINAL CTA
+       ============================================================================== -->
+  <section class="section" id="final-cta">
+    <div class="container">
+      <div class="final-cta-box">
+        <span class="eyebrow" style="color: var(--color-lime);">START WITH DIRECTION</span>
+        <h2 class="final-cta-title">Every Business Starts Somewhere. Start With Clarity.</h2>
+        <p class="final-cta-copy">
+          Bring your ideas, ask your questions, and explore your next steps with Next Foundery. Get practical guidance and access to session recordings for just ₹199.
+        </p>
+
+        <div>
+          <a href="/checkout" class="btn btn-primary" id="finalCtaClaim">
+            Claim Your Seat for ₹199
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+
+        <div class="final-cta-links">
+          <a href="/refund-policy">Refund Policy</a>
+          <span>&bull;</span>
+          <a href="/terms">Terms and Conditions</a>
+          <span>&bull;</span>
+          <a href="/privacy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

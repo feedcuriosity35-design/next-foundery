@@ -1,0 +1,157 @@
+<%- include('partials/head', { title, metaDescription }) %>
+
+<header class="navbar" style="border-bottom: 1px solid var(--color-border-subtle);">
+  <div class="container navbar-inner" style="justify-content: space-between;">
+    <a href="/" class="brand-link">
+      <img src="/nextfoundery-logo.png" alt="Next Foundery Logo" class="brand-logo-img">
+      <div class="brand-text-container">
+        <span class="brand-name">Next Foundery</span>
+        <span class="brand-tagline">Businesses Built Better</span>
+      </div>
+    </a>
+    <span style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255, 180, 0, 0.15); border: 1px solid #FFB400; color: #FFB400; padding: 0.35rem 0.85rem; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700;">
+      Awaiting Verification
+    </span>
+  </div>
+</header>
+
+<main class="section" style="padding-top: 3.5rem; padding-bottom: 5rem;">
+  <div class="container container-narrow">
+    <div class="status-card">
+      <!-- Pending Icon -->
+      <div class="status-icon-large status-icon-pending">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      </div>
+
+      <span class="eyebrow" style="color: #FFB400;">TRANSACTION IN REVIEW</span>
+      <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); margin-top: 0.5rem; margin-bottom: 0.75rem;">
+        Payment Pending Verification
+      </h1>
+      <p class="body-text" style="font-size: 1.05rem; max-width: 540px; margin: 0 auto 2rem;">
+        Your registration payment is currently awaiting bank settlement or reference verification.
+      </p>
+
+      <!-- Important Guidance Box (No duplicate payments!) -->
+      <div style="background: rgba(255, 180, 0, 0.08); border: 1px solid rgba(255, 180, 0, 0.3); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem; text-align: left;">
+        <h4 style="color: #FFB400; font-size: 1.05rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          Please Do Not Make a Duplicate Payment
+        </h4>
+        <p style="font-size: 0.92rem; color: var(--color-offwhite); line-height: 1.6;">
+          If money was debited from your bank account or UPI application, your transaction will be matched against your order reference. Refreshing this page will not create a second charge.
+        </p>
+      </div>
+
+      <% if (order) { %>
+      <table class="order-details-table">
+        <tbody>
+          <tr>
+            <td class="order-details-label">Order Reference</td>
+            <td class="order-details-value" style="font-family: monospace;" id="orderIdText"><%= order.order_id %></td>
+          </tr>
+          <tr>
+            <td class="order-details-label">Attendee</td>
+            <td class="order-details-value"><%= order.name %> (<%= order.email %>)</td>
+          </tr>
+          <tr>
+            <td class="order-details-label">Amount</td>
+            <td class="order-details-value">₹199 INR</td>
+          </tr>
+          <% if (order.utr_reference) { %>
+          <tr>
+            <td class="order-details-label">Submitted UPI UTR</td>
+            <td class="order-details-value" style="font-family: monospace;"><%= order.utr_reference %></td>
+          </tr>
+          <% } %>
+          <tr>
+            <td class="order-details-label">Current Status</td>
+            <td class="order-details-value" style="color: #FFB400;" id="statusBadge">Pending Verification</td>
+          </tr>
+        </tbody>
+      </table>
+      <% } %>
+
+      <!-- Check Status Button -->
+      <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <button type="button" class="btn btn-primary" id="checkStatusBtn">
+          <span id="checkBtnText">Check Verification Status</span>
+          <span id="checkBtnSpinner" style="display: none;">Checking...</span>
+        </button>
+        <a href="/contact" class="btn btn-secondary">
+          Contact Support Desk
+        </a>
+      </div>
+
+      <div id="statusMessage" style="margin-top: 1.25rem; font-size: 0.92rem; color: var(--color-muted-light); display: none;"></div>
+
+      <div style="margin-top: 2.5rem; font-size: 0.88rem; color: var(--color-muted-light);">
+        For immediate assistance, email us at 
+        <a href="mailto:<%= config.support.email %>" style="color: var(--color-lime); text-decoration: underline;"><%= config.support.email %></a> 
+        with your Order ID.
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const checkBtn = document.getElementById('checkStatusBtn');
+  const btnText = document.getElementById('checkBtnText');
+  const btnSpinner = document.getElementById('checkBtnSpinner');
+  const msg = document.getElementById('statusMessage');
+  const orderId = "<%= order ? order.order_id : (orderId || '') %>";
+
+  if (!orderId || !checkBtn) return;
+
+  async function checkStatus() {
+    checkBtn.disabled = true;
+    btnText.style.display = 'none';
+    btnSpinner.style.display = 'inline-block';
+    msg.style.display = 'none';
+
+    try {
+      const res = await fetch(`/api/order-status/${encodeURIComponent(orderId)}`);
+      const data = await res.json();
+
+      if (data.isPaid && data.successUrl) {
+        msg.textContent = 'Payment verified! Redirecting to confirmation...';
+        msg.style.color = '#B7F52A';
+        msg.style.display = 'block';
+        setTimeout(() => {
+          window.location.href = data.successUrl;
+        }, 1000);
+      } else if (data.isFailed) {
+        window.location.href = `/payment-failed?order_id=${encodeURIComponent(orderId)}`;
+      } else {
+        msg.textContent = 'Payment is still being processed by the bank or gateway. Please check again in a minute or contact support.';
+        msg.style.color = '#FFB400';
+        msg.style.display = 'block';
+        checkBtn.disabled = false;
+        btnText.style.display = 'inline-block';
+        btnSpinner.style.display = 'none';
+      }
+    } catch (e) {
+      msg.textContent = 'Unable to reach status server. Please try again.';
+      msg.style.display = 'block';
+      checkBtn.disabled = false;
+      btnText.style.display = 'inline-block';
+      btnSpinner.style.display = 'none';
+    }
+  }
+
+  checkBtn.addEventListener('click', checkStatus);
+
+  // Auto poll every 10 seconds (up to 3 times)
+  let polls = 0;
+  const pollInterval = setInterval(() => {
+    polls++;
+    if (polls > 3) {
+      clearInterval(pollInterval);
+      return;
+    }
+    checkStatus();
+  }, 10000);
+});
+</script>
+
+<%- include('partials/footer') %>

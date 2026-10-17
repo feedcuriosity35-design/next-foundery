@@ -1,0 +1,20 @@
+<%- include('partials/head', { title, metaDescription }) %>
+<%- include('partials/header') %>
+
+<main class="section" style="padding-top: 5rem; padding-bottom: 6rem;">
+  <div class="container container-narrow">
+    <div class="status-card">
+      <span class="eyebrow">ERROR 404</span>
+      <h1 style="font-size: 2.2rem; margin-top: 0.5rem; margin-bottom: 1rem;">Page Not Found</h1>
+      <p class="body-text" style="margin-bottom: 2rem;">
+        The page you are looking for does not exist or has been moved.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1rem;">
+        <a href="/" class="btn btn-primary">Return Home</a>
+        <a href="/checkout" class="btn btn-secondary">Masterclass Checkout · ₹199</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

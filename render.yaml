@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: next-foundery
+    env: node
+    plan: free
+    region: singapore
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+      - key: MASTERCLASS_TITLE
+        value: Business Growth Blueprint Masterclass
+      - key: MASTERCLASS_PRICE
+        value: 199
+      - key: MASTERCLASS_CURRENCY
+        value: INR
+      - key: SUPPORT_EMAIL
+        value: nextfoundery@gmail.com
+      - key: SUPPORT_HOURS
+        value: Monday – Saturday, 10:00 AM – 6:00 PM IST
+      - key: SESSION_DATE
+        value: Saturday, 25 October 2026
+      - key: SESSION_TIME
+        value: 11:00 AM – 1:00 PM IST
+      - key: SESSION_FORMAT
+        value: Live Interactive Online Session (Zoom)
+      - key: UPI_VPA
+        value: 9205828721@ptsbi
+      - key: UPI_PAYEE_NAME
+        value: Aarushi Bajpai (Next Foundery)
+      - key: CASHFREE_ENV
+        value: SANDBOX
+      - key: CASHFREE_APP_ID
+        sync: false
+      - key: CASHFREE_SECRET_KEY
+        sync: false
+      - key: ADMIN_ACCESS_PIN
+        value: admin199

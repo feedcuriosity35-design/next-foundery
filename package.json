@@ -1,0 +1,26 @@
+{
+  "name": "next-foundery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node -e \"console.log('Next Foundery tests ready')\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.7",
+    "ejs": "^7.0.1",
+    "express": "^5.3.0",
+    "jsqr": "^1.4.0",
+    "nodemailer": "^10.1.1",
+    "pngjs": "^7.0.0",
+    "qrcode": "^1.5.4",
+    "razorpay": "^2.9.8"
+  }
+}

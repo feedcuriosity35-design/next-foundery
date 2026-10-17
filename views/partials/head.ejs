@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'Next Foundery — Businesses Built Better | Business Growth Blueprint Masterclass' %></title>
+  <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Next Foundery helps aspiring entrepreneurs turn ideas into actionable plans. Join the Business Growth Blueprint Masterclass for ₹199.' %>">
+  
+  <!-- SEO & Social OpenGraph -->
+  <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'Next Foundery — Businesses Built Better' %>">
+  <meta property="og:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Turn your business idea into an actionable plan. Practical business guidance, open discussion, and session recordings for ₹199.' %>">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/images/hero-blueprint.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#07140B">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/nextfoundery-logo.png">
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Vanilla CSS Design System -->
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- Razorpay Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>

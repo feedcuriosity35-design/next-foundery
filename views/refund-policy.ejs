@@ -1,0 +1,62 @@
+<%- include('partials/head', { title, metaDescription }) %>
+<%- include('partials/header') %>
+
+<main class="section" style="padding-top: 4rem;">
+  <div class="container container-narrow">
+    <div style="margin-bottom: 2.5rem;">
+      <span class="eyebrow">TRANSPARENT PURCHASING</span>
+      <h1 class="section-title">Refund &amp; Cancellation Policy</h1>
+      <p class="body-text">Last Updated: October 2026</p>
+    </div>
+
+    <div class="checkout-card" style="line-height: 1.8; font-size: 0.98rem; color: var(--color-offwhite);">
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 1rem; margin-bottom: 0.75rem;">1. Clear &amp; Fair Purchasing Policy</h2>
+      <p style="margin-bottom: 1.25rem;">
+        Next Foundery believes in complete transparency. The <strong>Business Growth Blueprint Masterclass</strong> is offered at a special launch price of <strong>₹199 INR</strong> to make practical business guidance and frameworks accessible to all aspiring founders. Please review our cancellation and refund terms carefully prior to registering.
+      </p>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">2. Session Recordings Included for All Participants</h2>
+      <p style="margin-bottom: 1.25rem;">
+        We understand that unforeseen scheduling conflicts may arise. Therefore, <strong>access to session recordings is included with every registration</strong>. If you are unable to attend the live online session at the scheduled date and time, you will still receive instructions for accessing the session recording so that you do not miss the discussions, framework breakdowns, and learning material.
+      </p>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">3. Pre-Session Cancellation (100% Refund)</h2>
+      <p style="margin-bottom: 1.25rem;">
+        If you wish to cancel your registration, you may do so by submitting a written request to our support desk at least <strong>24 hours prior to the scheduled live session start time</strong>. 
+      </p>
+      <div style="background: rgba(37, 184, 74, 0.08); border: 1px solid rgba(37, 184, 74, 0.25); border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 1.25rem;">
+        <strong style="color: var(--color-lime);">Eligible Pre-Session Cancellations:</strong><br>
+        Participants who request cancellation at least 24 hours in advance will receive a <strong>100% full refund of ₹199</strong> back to their original UPI payment source.
+      </div>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">4. Post-Delivery &amp; Non-Refundable Scenarios</h2>
+      <p style="margin-bottom: 0.75rem;">Refunds will not be issued in the following circumstances:</p>
+      <ul style="margin-left: 1.5rem; margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li>Cancellation requests received less than 24 hours before the scheduled live session.</li>
+        <li>Once session access links, materials, or recording access details have been distributed to the registered participant.</li>
+        <li>Failure to attend the live session (session recordings are provided in lieu).</li>
+        <li>Removal from the session or community due to a violation of the Participant Code of Conduct.</li>
+      </ul>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">5. How to Request a Cancellation</h2>
+      <p style="margin-bottom: 0.75rem;">To initiate a cancellation, please send an email with the subject line <em>"Refund Request - [Your Order ID]"</em> to:</p>
+      <div style="background: var(--color-forest); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 1.5rem;">
+        <strong>Next Foundery Support Desk</strong><br>
+        Email: <a href="mailto:<%= config.support.email %>" style="color: var(--color-lime);"><%= config.support.email %></a><br>
+        Please include:
+        <ul style="margin-left: 1.25rem; margin-top: 0.5rem;">
+          <li>Your Full Name</li>
+          <li>Your Registered Email Address &amp; Mobile Number</li>
+          <li>Order Reference Number (e.g. NF-ORD-...)</li>
+        </ul>
+      </div>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">6. Refund Processing Timeline</h2>
+      <p style="margin-bottom: 1.25rem;">
+        Once approved, the refund will be initiated to your original UPI payment handle via the payment gateway within 2 business days. It typically reflects in your linked bank account within 5 to 7 business days, depending upon your bank's settlement cycle.
+      </p>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

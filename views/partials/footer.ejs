@@ -1,0 +1,81 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Col 1: Brand -->
+      <div class="footer-brand-col">
+        <a href="/" class="brand-link" style="margin-bottom: 1rem;">
+          <img src="/nextfoundery-logo.png" alt="Next Foundery Logo" class="brand-logo-img">
+          <div class="brand-text-container">
+            <span class="brand-name">Next Foundery</span>
+            <span class="brand-tagline">Businesses Built Better</span>
+          </div>
+        </a>
+        <p class="footer-brand-desc">
+          We help aspiring entrepreneurs approach business building with rigorous research, idea validation, sound strategy, and structured execution.
+        </p>
+      </div>
+
+      <!-- Col 2: Navigation -->
+      <div>
+        <h4 class="footer-col-title">Masterclass</h4>
+        <ul class="footer-links">
+          <li><a href="/#explore" class="footer-link">What You'll Explore</a></li>
+          <li><a href="/#inclusions" class="footer-link">What's Included</a></li>
+          <li><a href="/#how-it-works" class="footer-link">How It Works</a></li>
+          <li><a href="/#who-is-this-for" class="footer-link">Who It's For</a></li>
+          <li><a href="/#faq" class="footer-link">FAQ</a></li>
+          <li><a href="/checkout" class="footer-link" style="color: var(--color-lime); font-weight: 600;">Claim Seat · ₹199</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Company -->
+      <div>
+        <h4 class="footer-col-title">Company</h4>
+        <ul class="footer-links">
+          <li><a href="/about" class="footer-link">About Next Foundery</a></li>
+          <li><a href="/contact" class="footer-link">Contact & Support</a></li>
+          <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="footer-link">Terms & Conditions</a></li>
+          <li><a href="/refund-policy" class="footer-link">Refund Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Support & Details -->
+      <div>
+        <h4 class="footer-col-title">Assistance</h4>
+        <ul class="footer-links">
+          <li style="color: var(--color-muted-light); font-size: 0.92rem;">
+            Email Support:<br>
+            <a href="mailto:<%= config.support.email %>" class="footer-link" style="color: var(--color-white); font-weight: 600;">
+              <%= config.support.email %>
+            </a>
+          </li>
+          <li style="color: var(--color-muted-light); font-size: 0.92rem; margin-top: 0.5rem;">
+            Hours:<br>
+            <span style="color: var(--color-white);"><%= config.support.hours %></span>
+          </li>
+          <li style="margin-top: 0.5rem;">
+            <span style="display: inline-block; background: rgba(183, 245, 42, 0.1); border: 1px solid rgba(183, 245, 42, 0.3); color: var(--color-lime); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 700;">
+              Secure UPI Payments · ₹199
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <div>
+        &copy; <%= new Date().getFullYear() %> Next Foundery. All rights reserved.
+      </div>
+      <div>
+        Businesses Built Better · Practical Business Guidance &amp; Validation
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Global Client Scripts -->
+<script src="/js/main.js"></script>
+</body>
+</html>

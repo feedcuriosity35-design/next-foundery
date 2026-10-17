@@ -1,0 +1,177 @@
+<%- include('partials/head', { title, metaDescription }) %>
+
+<header class="navbar" style="border-bottom: 1px solid var(--color-border-subtle);">
+  <div class="container navbar-inner" style="justify-content: space-between;">
+    <a href="/" class="brand-link">
+      <img src="/nextfoundery-logo.png" alt="Next Foundery Logo" class="brand-logo-img">
+      <div class="brand-text-container">
+        <span class="brand-name">Next Foundery</span>
+        <span class="brand-tagline">Businesses Built Better</span>
+      </div>
+    </a>
+    <span style="font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--color-lime);">
+      Admin &amp; Verification Console
+    </span>
+  </div>
+</header>
+
+<main class="section" style="padding-top: 3rem; padding-bottom: 5rem;">
+  <div class="container">
+    <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <span class="eyebrow">ORDER MANAGEMENT &amp; UTR REVIEW</span>
+        <h1 style="font-size: 2rem; margin-top: 0.25rem;">Registrations Database</h1>
+      </div>
+      <div>
+        <a href="/" class="btn btn-secondary btn-sm">Visit Website</a>
+        <a href="/checkout" class="btn btn-primary btn-sm">Test Checkout (₹199)</a>
+      </div>
+    </div>
+
+    <% if (!isAuthenticated) { %>
+      <!-- PIN Authentication Form -->
+      <div class="checkout-card" style="max-width: 440px; margin: 4rem auto; text-align: center;">
+        <span class="eyebrow" style="color: var(--color-lime);">SECURE ACCESS</span>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--color-white);">Admin Verification PIN</h2>
+        <p class="body-text" style="font-size: 0.9rem; margin-bottom: 1.5rem;">
+          Enter the administrative access PIN to inspect registration orders and verify pending transactions.
+        </p>
+
+        <form method="GET" action="/admin/orders">
+          <div class="form-group">
+            <input type="password" name="pin" class="form-input" placeholder="Enter PIN (Default: admin199)" required autofocus style="text-align: center; font-size: 1.1rem; letter-spacing: 0.2em;">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Unlock Console</button>
+        </form>
+      </div>
+    <% } else { %>
+      <!-- Authenticated View: Orders Table -->
+      <div class="checkout-card" style="padding: 1.5rem; overflow-x: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <span style="font-weight: 700; color: var(--color-white);">Total Registered Records: <%= orders.length %></span>
+          <span style="font-size: 0.85rem; color: var(--color-muted-light);">Persistent SQLite (nextfoundery.db)</span>
+        </div>
+
+        <% if (orders.length === 0) { %>
+          <div style="text-align: center; padding: 3rem 1rem; color: var(--color-muted-light);">
+            No registration records found yet. Complete a test registration at <a href="/checkout" style="color: var(--color-lime); text-decoration: underline;">/checkout</a>.
+          </div>
+        <% } else { %>
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--color-border-subtle); color: var(--color-muted-light);">
+                <th style="padding: 0.75rem 1rem;">Order Reference</th>
+                <th style="padding: 0.75rem 1rem;">Attendee</th>
+                <th style="padding: 0.75rem 1rem;">Contact</th>
+                <th style="padding: 0.75rem 1rem;">Amount</th>
+                <th style="padding: 0.75rem 1rem;">Status</th>
+                <th style="padding: 0.75rem 1rem;">Method / UTR</th>
+                <th style="padding: 0.75rem 1rem;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% orders.forEach(order => { %>
+                <tr style="border-bottom: 1px solid var(--color-border-subtle);">
+                  <td style="padding: 1rem; font-family: monospace; color: var(--color-white); font-weight: 600;">
+                    <%= order.order_id %>
+                  </td>
+                  <td style="padding: 1rem; color: var(--color-white);">
+                    <strong><%= order.name %></strong>
+                    <% if (order.interest) { %>
+                      <div style="font-size: 0.78rem; color: var(--color-muted-light);"><%= order.interest %></div>
+                    <% } %>
+                  </td>
+                  <td style="padding: 1rem;">
+                    <div><%= order.email %></div>
+                    <div style="color: var(--color-muted-light); font-size: 0.82rem;">+91 <%= order.phone %></div>
+                  </td>
+                  <td style="padding: 1rem; font-weight: 700; color: var(--color-lime);">
+                    ₹<%= order.amount %>
+                  </td>
+                  <td style="padding: 1rem;">
+                    <% if (order.status === 'paid') { %>
+                      <span style="background: rgba(37, 184, 74, 0.15); color: #25B84A; border: 1px solid #25B84A; padding: 0.25rem 0.65rem; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 700;">
+                        PAID &amp; VERIFIED
+                      </span>
+                    <% } else if (order.status === 'pending_verification') { %>
+                      <span style="background: rgba(255, 180, 0, 0.15); color: #FFB400; border: 1px solid #FFB400; padding: 0.25rem 0.65rem; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 700;">
+                        PENDING UTR REVIEW
+                      </span>
+                    <% } else if (order.status === 'failed') { %>
+                      <span style="background: rgba(255, 90, 95, 0.15); color: #FF5A5F; border: 1px solid #FF5A5F; padding: 0.25rem 0.65rem; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 700;">
+                        FAILED
+                      </span>
+                    <% } else { %>
+                      <span style="background: rgba(255, 255, 255, 0.08); color: var(--color-offwhite); padding: 0.25rem 0.65rem; border-radius: var(--radius-full); font-size: 0.78rem;">
+                        CREATED
+                      </span>
+                    <% } %>
+                  </td>
+                  <td style="padding: 1rem; font-size: 0.82rem;">
+                    <div><%= order.payment_method %></div>
+                    <% if (order.utr_reference) { %>
+                      <div style="font-family: monospace; color: var(--color-lime); font-weight: 600;">UTR: <%= order.utr_reference %></div>
+                    <% } %>
+                  </td>
+                  <td style="padding: 1rem;">
+                    <% if (order.status === 'paid' && order.verification_token) { %>
+                      <a href="/success?order_id=<%= encodeURIComponent(order.order_id) %>&token=<%= encodeURIComponent(order.verification_token) %>" target="_blank" class="btn btn-secondary btn-sm" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;">
+                        View Receipt &rarr;
+                      </a>
+                    <% } else if (order.status === 'pending_verification' || order.status === 'created') { %>
+                      <button type="button" class="btn btn-primary btn-sm verify-btn" data-order-id="<%= order.order_id %>" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;">
+                        Approve &amp; Verify
+                      </button>
+                    <% } else { %>
+                      <span style="color: var(--color-muted); font-size: 0.8rem;">—</span>
+                    <% } %>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const pin = "<%= pin %>";
+
+  document.querySelectorAll('.verify-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const orderId = btn.getAttribute('data-order-id');
+      if (!confirm(`Confirm manual payment verification for order ${orderId}?`)) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Verifying...';
+
+      try {
+        const res = await fetch('/api/admin/verify-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pin, orderId }),
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          alert(`Order ${orderId} verified successfully!`);
+          window.location.reload();
+        } else {
+          alert(data.error || 'Verification failed');
+          btn.disabled = false;
+          btn.textContent = 'Approve & Verify';
+        }
+      } catch (err) {
+        alert('Server connection error');
+        btn.disabled = false;
+        btn.textContent = 'Approve & Verify';
+      }
+    });
+  });
+});
+</script>
+
+<%- include('partials/footer') %>

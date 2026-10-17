@@ -1,0 +1,65 @@
+<%- include('partials/head', { title, metaDescription }) %>
+<%- include('partials/header') %>
+
+<main class="section" style="padding-top: 4rem;">
+  <div class="container container-narrow">
+    <div style="margin-bottom: 2.5rem;">
+      <span class="eyebrow">LEGAL &amp; COMPLIANCE</span>
+      <h1 class="section-title">Privacy Policy</h1>
+      <p class="body-text">Last Updated: October 2026</p>
+    </div>
+
+    <div class="checkout-card" style="line-height: 1.8; font-size: 0.98rem; color: var(--color-offwhite);">
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 1rem; margin-bottom: 0.75rem;">1. Introduction</h2>
+      <p style="margin-bottom: 1.25rem;">
+        Next Foundery ("we," "our," or "us") is dedicated to protecting the privacy and personal data of our website visitors, participants, and registered attendees of our masterclasses. This Privacy Policy outlines our practices regarding the collection, processing, storage, and protection of your personal information in connection with the <strong>Business Growth Blueprint Masterclass</strong> and our website.
+      </p>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">2. Information We Collect</h2>
+      <p style="margin-bottom: 0.75rem;">When you register for the masterclass or interact with our website, we collect the following information:</p>
+      <ul style="margin-left: 1.5rem; margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li><strong>Attendee Registration Information:</strong> Your full name, email address, and mobile phone number provided at checkout.</li>
+        <li><strong>Business Context (Optional):</strong> Business ideas, startup interests, or questions submitted during registration or contact forms.</li>
+        <li><strong>Transaction Identifiers:</strong> Gateway order IDs, payment IDs, UPI reference/UTR numbers, and verification timestamps.</li>
+        <li><strong>Technical Information:</strong> Standard IP address, browser type, device information, and anonymous session telemetry.</li>
+      </ul>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">3. Payment Processing &amp; Financial Security</h2>
+      <p style="margin-bottom: 1.25rem;">
+        All payments for the Business Growth Blueprint Masterclass (fixed at ₹199 INR) are processed strictly via secure UPI payment gateways (such as Razorpay) and authorized Indian banking channels. <strong>Next Foundery does not collect, process, or store your UPI PIN, banking passwords, debit card numbers, or sensitive financial authorization credentials.</strong> Payment data is tokenized and verified directly through cryptographic signatures provided by the payment gateway.
+      </p>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">4. How We Use Your Information</h2>
+      <p style="margin-bottom: 0.75rem;">We use your data strictly for legitimate operational purposes:</p>
+      <ul style="margin-left: 1.5rem; margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem;">
+        <li>To confirm your registration and verify the ₹199 transaction.</li>
+        <li>To deliver session joining links, calendar invites, and recording access instructions via email and WhatsApp.</li>
+        <li>To provide administrative support and address inquiries submitted through our contact desk.</li>
+        <li>To maintain auditable transaction records required under applicable Indian accounting and taxation laws.</li>
+      </ul>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">5. Third-Party Disclosures &amp; Infrastructure</h2>
+      <p style="margin-bottom: 1.25rem;">
+        We do not sell, rent, or trade your personal information. Information is shared only with verified service providers necessary to fulfill your masterclass access (e.g. licensed payment gateways, communication infrastructure like WhatsApp/email notification relays, and secure database hosting).
+      </p>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">6. Data Security &amp; Retention</h2>
+      <p style="margin-bottom: 1.25rem;">
+        We implement industry-standard encryption, firewalls, and server-side HMAC verification to safeguard stored data against unauthorized access, loss, or misuse. Attendee registration and payment verification records are retained for the duration required to fulfill the masterclass delivery and legal reporting requirements.
+      </p>
+
+      <h2 style="font-size: 1.35rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 0.75rem;">7. Your Rights &amp; Grievances</h2>
+      <p style="margin-bottom: 1.25rem;">
+        You have the right to request access to the personal data we hold about you, request corrections to erroneous records, or ask for deletion of non-statutory data following session completion. For any privacy queries or grievances, please contact:
+      </p>
+      <div style="background: var(--color-forest); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 1.5rem;">
+        <strong>Privacy &amp; Data Officer</strong><br>
+        Next Foundery Support Desk<br>
+        Email: <a href="mailto:<%= config.support.email %>" style="color: var(--color-lime);"><%= config.support.email %></a><br>
+        Operating Hours: <%= config.support.hours %>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
